@@ -20,9 +20,9 @@
 # Learn more: http://github.com/javan/whenever
 
 every :weekday, :at => '7pm' do
-  rake "bunstocks:update_bunstocks"
+  rake "bunstocks:update_bunstocks", :environment => "development"
 end
 
-every 1.minute do
-    runner "Stock.whenever_test"
-end
+#every :day, :at => '1:38pm' do
+#    rake "bunstocks:whenever_test", :environment => "development"
+#end

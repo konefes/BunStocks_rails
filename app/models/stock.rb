@@ -36,7 +36,7 @@ class Stock < ActiveRecord::Base
                 response = open(query).read
                 hash = JSON.parse response
                 hash["query"]["results"]["quote"].each do |priceHash|
-                    priceArray.push(priceHash["PreviousClose"].to_f)
+                    priceArray.push(priceHash["LastTradePriceOnly"].to_f)
                 end
                 query = ""
                 queryCount = 0
@@ -85,8 +85,7 @@ class Stock < ActiveRecord::Base
     def self.whenever_test
         firebase_uri = 'https://bunstocks-32cd8.firebaseio.com/'
         firebase = Firebase::Client.new(firebase_uri, Rails.application.secrets.firebase_key)
-        response = firebase.set("test/" + Date.today.to_s, {:price => 99})
-        puts "test complete"
+        response = firebase.set("test", {:time => Time.now.to_s})
     end
     
 end
