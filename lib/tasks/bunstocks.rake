@@ -6,6 +6,10 @@ task :update_bunstocks => :environment do
     Stock.update_bunstocks
 end
 
+task :historic_to_firebase => :environment do
+    Stock.historic_to_firebase
+end
+
 task :fill_db => :environment do
     Stock.fill_db
 end
